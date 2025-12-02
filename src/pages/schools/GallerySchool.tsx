@@ -60,7 +60,13 @@ const GallerySchool = () => {
 
         <Card variant="gradient" className="animate-slide-up">
           <CardContent className="p-6 text-center">
-            <div className="text-5xl mb-4">{school.logo}</div>
+            <div className="mb-4">
+              <img 
+                src={school.logo} 
+                alt={school.name}
+                className="w-24 h-24 mx-auto object-contain"
+              />
+            </div>
             <h2 className="text-xl font-bold text-primary-foreground mb-2">{school.name}</h2>
             <p className="text-primary-foreground/80 mb-4">{school.description}</p>
             

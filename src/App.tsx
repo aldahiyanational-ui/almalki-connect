@@ -16,8 +16,17 @@ import DashboardSchool from "./pages/schools/DashboardSchool";
 import StudentProfileSchool from "./pages/schools/StudentProfileSchool";
 import ScheduleSchool from "./pages/schools/ScheduleSchool";
 import GallerySchool from "./pages/schools/GallerySchool";
+import HomeworkSchool from "./pages/schools/HomeworkSchool";
+import ExamsSchool from "./pages/schools/ExamsSchool";
+import AttendanceSchool from "./pages/schools/AttendanceSchool";
+import FeesSchool from "./pages/schools/FeesSchool";
+import TransportSchool from "./pages/schools/TransportSchool";
+import MessagesSchool from "./pages/schools/MessagesSchool";
+import ActivitiesSchool from "./pages/schools/ActivitiesSchool";
+import LibrarySchool from "./pages/schools/LibrarySchool";
+import SettingsSchool from "./pages/schools/SettingsSchool";
 
-// Import existing pages for school routes
+// Import existing pages for non-school routes
 import StudentProfile from "./pages/StudentProfile";
 import Schedule from "./pages/Schedule";
 import Homework from "./pages/Homework";
@@ -63,15 +72,15 @@ const App = () => (
           <Route path="/:schoolId/dashboard" element={<DashboardSchool />} />
           <Route path="/:schoolId/student-profile" element={<StudentProfileSchool />} />
           <Route path="/:schoolId/schedule" element={<ScheduleSchool />} />
-          <Route path="/:schoolId/homework" element={<Homework />} />
-          <Route path="/:schoolId/exams" element={<Exams />} />
-          <Route path="/:schoolId/attendance" element={<Attendance />} />
-          <Route path="/:schoolId/fees" element={<Fees />} />
-          <Route path="/:schoolId/transport" element={<Transport />} />
-          <Route path="/:schoolId/messages" element={<Messages />} />
-          <Route path="/:schoolId/activities" element={<Activities />} />
-          <Route path="/:schoolId/library" element={<Library />} />
-          <Route path="/:schoolId/settings" element={<Settings />} />
+          <Route path="/:schoolId/homework" element={<HomeworkSchool />} />
+          <Route path="/:schoolId/exams" element={<ExamsSchool />} />
+          <Route path="/:schoolId/attendance" element={<AttendanceSchool />} />
+          <Route path="/:schoolId/fees" element={<FeesSchool />} />
+          <Route path="/:schoolId/transport" element={<TransportSchool />} />
+          <Route path="/:schoolId/messages" element={<MessagesSchool />} />
+          <Route path="/:schoolId/activities" element={<ActivitiesSchool />} />
+          <Route path="/:schoolId/library" element={<LibrarySchool />} />
+          <Route path="/:schoolId/settings" element={<SettingsSchool />} />
           <Route path="/:schoolId/gallery" element={<GallerySchool />} />
           
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

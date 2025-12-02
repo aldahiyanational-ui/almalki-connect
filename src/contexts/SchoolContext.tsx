@@ -1,4 +1,8 @@
 import { createContext, useContext, ReactNode } from "react";
+import logoDahiyaBoys from "@/assets/logo-dahiya-boys.png";
+import logoDahiyaGirls from "@/assets/logo-dahiya-girls.png";
+import logoAjiyal from "@/assets/logo-ajiyal.png";
+import logoQanadeeel from "@/assets/logo-qanadeeel.png";
 
 export interface School {
   id: string;
@@ -14,7 +18,7 @@ export const schools: Record<string, School> = {
     id: "ajiyal",
     name: "مدارس أجيال المعالي الأهلية",
     nameEn: "Ajiyal Al-Maali Schools",
-    logo: "🎓",
+    logo: logoAjiyal,
     color: "from-blue-500 to-purple-500",
     description: "نحو جيل متميز ومبدع",
   },
@@ -22,7 +26,7 @@ export const schools: Record<string, School> = {
     id: "qanadeeel",
     name: "مدارس قناديل الشرق الأهلية",
     nameEn: "Qanadeel Al-Shark Schools",
-    logo: "🏫",
+    logo: logoQanadeeel,
     color: "from-green-500 to-teal-500",
     description: "إضاءة طريق التميز",
   },
@@ -30,7 +34,7 @@ export const schools: Record<string, School> = {
     id: "dahiya-girls",
     name: "مدارس الضاحية الأهلية للبنات",
     nameEn: "Al-Daahiya Girls Schools",
-    logo: "🌸",
+    logo: logoDahiyaGirls,
     color: "from-pink-500 to-rose-500",
     description: "تعليم متميز للبنات",
   },
@@ -38,7 +42,7 @@ export const schools: Record<string, School> = {
     id: "dahiya-boys",
     name: "مدارس الضاحية الأهلية للبنين",
     nameEn: "Al-Daahiya Boys Schools",
-    logo: "⚡",
+    logo: logoDahiyaBoys,
     color: "from-orange-500 to-red-500",
     description: "تعليم متميز للبنين",
   },

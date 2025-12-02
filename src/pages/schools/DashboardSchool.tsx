@@ -48,7 +48,13 @@ const DashboardSchool = () => {
 
       <main className="container mx-auto px-4 py-6 space-y-6">
         <Card variant="gradient" className="p-6 text-center">
-          <div className="text-4xl mb-3">{school.logo}</div>
+          <div className="mb-3">
+            <img 
+              src={school.logo} 
+              alt={school.name}
+              className="w-20 h-20 mx-auto object-contain"
+            />
+          </div>
           <h1 className="text-2xl font-bold text-primary-foreground mb-2">{school.name}</h1>
           <p className="text-primary-foreground/80">{school.description}</p>
           <Badge variant="secondary" className="mt-3">{school.nameEn}</Badge>

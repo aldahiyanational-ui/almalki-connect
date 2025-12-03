@@ -11,16 +11,40 @@ export interface School {
   logo: string;
   color: string;
   description: string;
+  address?: string;
+  phone?: string;
 }
 
 export const schools: Record<string, School> = {
+  "dahiya-boys": {
+    id: "dahiya-boys",
+    name: "مدارس الضاحية الأهلية للبنين",
+    nameEn: "Al-Daahiya Boys Schools",
+    logo: logoDahiyaBoys,
+    color: "from-orange-500 to-red-500",
+    description: "ابتدائي - متوسط - ثانوي",
+    address: "حي الضباب",
+    phone: "0508704443",
+  },
+  "dahiya-girls": {
+    id: "dahiya-girls",
+    name: "مدارس الضاحية الأهلية بنات",
+    nameEn: "Al-Daahiya Girls Schools",
+    logo: logoDahiyaGirls,
+    color: "from-pink-500 to-rose-500",
+    description: "رياض أطفال - ابتدائي - متوسط",
+    address: "حي الضباب",
+    phone: "0539893393",
+  },
   ajiyal: {
     id: "ajiyal",
     name: "مدارس أجيال المعالي الأهلية",
     nameEn: "Ajiyal Al-Maali Schools",
     logo: logoAjiyal,
     color: "from-blue-500 to-purple-500",
-    description: "نحو جيل متميز ومبدع",
+    description: "رياض أطفال - ابتدائي - متوسط",
+    address: "ضاحية الملك فهد",
+    phone: "0558501166",
   },
   qanadeeel: {
     id: "qanadeeel",
@@ -28,23 +52,9 @@ export const schools: Record<string, School> = {
     nameEn: "Qanadeel Al-Shark Schools",
     logo: logoQanadeeel,
     color: "from-green-500 to-teal-500",
-    description: "إضاءة طريق التميز",
-  },
-  "dahiya-girls": {
-    id: "dahiya-girls",
-    name: "مدارس الضاحية الأهلية للبنات",
-    nameEn: "Al-Daahiya Girls Schools",
-    logo: logoDahiyaGirls,
-    color: "from-pink-500 to-rose-500",
-    description: "تعليم متميز للبنات",
-  },
-  "dahiya-boys": {
-    id: "dahiya-boys",
-    name: "مدارس الضاحية الأهلية للبنين",
-    nameEn: "Al-Daahiya Boys Schools",
-    logo: logoDahiyaBoys,
-    color: "from-orange-500 to-red-500",
-    description: "تعليم متميز للبنين",
+    description: "رياض أطفال - ابتدائي - متوسط",
+    address: "حي الشعلة",
+    phone: "0552229953",
   },
 };
 

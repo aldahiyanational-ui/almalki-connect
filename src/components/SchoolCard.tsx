@@ -21,7 +21,7 @@ const SchoolCard = ({ id, name, description, color, students, location, delay = 
       variant="school"
       className="overflow-hidden animate-slide-up"
       style={{ animationDelay: `${delay}ms` }}
-      onClick={() => navigate(`/school/${id}`)}
+      onClick={() => navigate(`/${id}/dashboard`)}
     >
       {/* Color bar */}
       <div className={`h-2 ${color}`} />

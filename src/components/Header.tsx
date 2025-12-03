@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { GraduationCap, Globe, Bell, Menu, X } from "lucide-react";
+import { Globe, Bell, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import logoAlmalki from "@/assets/logo-almalki-group.png";
 
 const Header = () => {
   const navigate = useNavigate();
@@ -21,13 +22,11 @@ const Header = () => {
             onClick={() => navigate("/")}
             className="flex items-center gap-3 group"
           >
-            <div className="w-10 h-10 gradient-primary rounded-xl flex items-center justify-center shadow-primary group-hover:scale-105 transition-transform">
-              <GraduationCap className="w-5 h-5 text-primary-foreground" />
-            </div>
-            <div className="hidden sm:block text-right">
-              <h1 className="font-bold text-foreground">مجموعة المالكي</h1>
-              <p className="text-xs text-muted-foreground">التعليمية</p>
-            </div>
+            <img 
+              src={logoAlmalki} 
+              alt="مجموعة المالكي التعليمية"
+              className="h-12 w-auto object-contain group-hover:scale-105 transition-transform"
+            />
           </button>
 
           {/* Desktop Navigation */}

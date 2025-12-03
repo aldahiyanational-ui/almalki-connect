@@ -1,28 +1,31 @@
 import { useState, useEffect } from "react";
-import { Newspaper, Phone, CreditCard, Bus, GraduationCap } from "lucide-react";
+import { Newspaper, Phone, CreditCard, Bus } from "lucide-react";
 import SplashScreen from "@/components/SplashScreen";
 import Header from "@/components/Header";
 import BottomNavigation from "@/components/BottomNavigation";
 import SchoolCard from "@/components/SchoolCard";
 import QuickAccessCard from "@/components/QuickAccessCard";
 import NotificationCarousel from "@/components/NotificationCarousel";
+import studentsGroup from "@/assets/students-group-saudi.png";
+import studentBoy from "@/assets/student-boy-saudi.png";
+import studentGirl from "@/assets/student-girl-saudi.png";
 
 const schools = [
   {
-    id: "ajyal",
+    id: "ajiyal",
     name: "أجيال المعالي الأهلية",
     description: "تعليم متميز لأجيال المستقبل مع رؤية تربوية شاملة",
     color: "bg-primary",
     students: "1,200+",
-    location: "الرياض",
+    location: "الدمام",
   },
   {
-    id: "qanadil",
+    id: "qanadeeel",
     name: "قناديل الشرق الأهلية",
     description: "إضاءة طريق العلم والمعرفة لبناء جيل واعد",
     color: "bg-secondary",
     students: "800+",
-    location: "الرياض",
+    location: "الدمام",
   },
   {
     id: "dahiya-girls",
@@ -30,7 +33,7 @@ const schools = [
     description: "بيئة تعليمية آمنة ومحفزة للطالبات",
     color: "gradient-primary",
     students: "950+",
-    location: "الرياض",
+    location: "الدمام",
   },
   {
     id: "dahiya-boys",
@@ -38,7 +41,7 @@ const schools = [
     description: "تنمية شاملة للطلاب في بيئة تربوية متكاملة",
     color: "bg-school-navy",
     students: "1,100+",
-    location: "الرياض",
+    location: "الدمام",
   },
 ];
 
@@ -105,19 +108,34 @@ const Index = () => {
             <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary-foreground rounded-full blur-3xl" />
           </div>
 
-          <div className="relative z-10 text-center">
-            <div className="inline-flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-sm px-4 py-2 rounded-full mb-4 animate-fade-in">
-              <GraduationCap className="w-5 h-5 text-secondary" />
-              <span className="text-primary-foreground text-sm font-medium">مرحباً بكم</span>
-            </div>
+          <div className="relative z-10 flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="text-center md:text-right flex-1">
+              <div className="inline-flex items-center gap-2 bg-primary-foreground/10 backdrop-blur-sm px-4 py-2 rounded-full mb-4 animate-fade-in">
+                <span className="text-primary-foreground text-sm font-medium">مرحباً بكم في الدمام</span>
+              </div>
 
-            <h1 className="text-3xl md:text-5xl font-bold text-primary-foreground mb-4 animate-slide-up">
-              مجموعة المالكي التعليمية
-            </h1>
-            <p className="text-lg md:text-xl text-primary-foreground/80 max-w-2xl mx-auto animate-slide-up" style={{ animationDelay: "0.1s" }}>
-              نبني أجيالاً متميزة بالعلم والقيم
-            </p>
+              <h1 className="text-3xl md:text-5xl font-bold text-primary-foreground mb-4 animate-slide-up">
+                مجموعة المالكي التعليمية
+              </h1>
+              <p className="text-lg md:text-xl text-primary-foreground/80 max-w-2xl animate-slide-up" style={{ animationDelay: "0.1s" }}>
+                نبني أجيالاً متميزة بالعلم والقيم
+              </p>
+            </div>
+            
+            <div className="hidden md:flex items-end gap-2 animate-slide-up" style={{ animationDelay: "0.2s" }}>
+              <img src={studentGirl} alt="طالبة" className="w-28 h-28 object-cover rounded-2xl shadow-lg" />
+              <img src={studentBoy} alt="طالب" className="w-32 h-32 object-cover rounded-2xl shadow-lg -mb-2" />
+            </div>
           </div>
+        </section>
+
+        {/* Students Banner - Mobile */}
+        <section className="md:hidden animate-slide-up">
+          <img 
+            src={studentsGroup} 
+            alt="طلاب مجموعة المالكي التعليمية" 
+            className="w-full h-48 object-cover rounded-2xl shadow-lg"
+          />
         </section>
 
         {/* Notifications */}

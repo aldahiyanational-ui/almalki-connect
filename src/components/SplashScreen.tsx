@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { GraduationCap } from "lucide-react";
+import logoAlmalki from "@/assets/logo-almalki-group.png";
 
 interface SplashScreenProps {
   onComplete: () => void;
@@ -33,20 +33,14 @@ const SplashScreen = ({ onComplete }: SplashScreenProps) => {
 
       {/* Logo */}
       <div className="relative z-10 flex flex-col items-center">
-        <div className="relative mb-8">
+        <div className="relative mb-8 animate-scale-in">
           <div className="absolute inset-0 bg-secondary/20 rounded-full blur-2xl animate-pulse-slow" />
-          <div className="relative w-32 h-32 bg-primary-foreground/10 backdrop-blur-lg rounded-full flex items-center justify-center border border-primary-foreground/20 animate-scale-in">
-            <GraduationCap className="w-16 h-16 text-secondary animate-float" />
-          </div>
+          <img 
+            src={logoAlmalki} 
+            alt="مجموعة المالكي التعليمية"
+            className="relative w-48 h-auto object-contain animate-float"
+          />
         </div>
-
-        {/* Title */}
-        <h1 className="text-4xl md:text-5xl font-bold text-primary-foreground mb-2 animate-slide-up" style={{ animationDelay: "0.2s" }}>
-          مجموعة المالكي
-        </h1>
-        <p className="text-xl text-primary-foreground/80 mb-12 animate-slide-up" style={{ animationDelay: "0.4s" }}>
-          التعليمية
-        </p>
 
         {/* Progress bar */}
         <div className="w-64 h-1.5 bg-primary-foreground/20 rounded-full overflow-hidden animate-fade-in" style={{ animationDelay: "0.6s" }}>

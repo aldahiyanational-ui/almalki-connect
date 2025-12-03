@@ -10,11 +10,12 @@ interface SchoolCardProps {
   color: string;
   students: string;
   location: string;
+  phone?: string;
   logo: string;
   delay?: number;
 }
 
-const SchoolCard = ({ id, name, description, color, students, location, logo, delay = 0 }: SchoolCardProps) => {
+const SchoolCard = ({ id, name, description, color, students, location, phone, logo, delay = 0 }: SchoolCardProps) => {
   const navigate = useNavigate();
 
   return (
@@ -44,15 +45,23 @@ const SchoolCard = ({ id, name, description, color, students, location, logo, de
         <p className="text-sm text-muted-foreground mb-4 line-clamp-2 text-center">{description}</p>
 
         {/* Stats */}
-        <div className="flex items-center justify-center gap-4 mb-4 text-sm text-muted-foreground">
-          <div className="flex items-center gap-1 bg-muted/50 px-2 py-1 rounded-full">
-            <Users className="w-3.5 h-3.5" />
-            <span>{students}</span>
+        <div className="flex flex-col gap-2 mb-4 text-sm text-muted-foreground">
+          <div className="flex items-center justify-center gap-4">
+            <div className="flex items-center gap-1 bg-muted/50 px-2 py-1 rounded-full">
+              <Users className="w-3.5 h-3.5" />
+              <span>{students}</span>
+            </div>
+            <div className="flex items-center gap-1 bg-muted/50 px-2 py-1 rounded-full">
+              <MapPin className="w-3.5 h-3.5" />
+              <span>{location}</span>
+            </div>
           </div>
-          <div className="flex items-center gap-1 bg-muted/50 px-2 py-1 rounded-full">
-            <MapPin className="w-3.5 h-3.5" />
-            <span>{location}</span>
-          </div>
+          {phone && (
+            <div className="flex items-center justify-center gap-1 text-xs text-primary font-medium" dir="ltr">
+              <span>📞</span>
+              <span>{phone}</span>
+            </div>
+          )}
         </div>
 
         <Button 

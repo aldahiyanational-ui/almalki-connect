@@ -6,6 +6,7 @@ import BottomNavigation from "@/components/BottomNavigation";
 import SchoolCard from "@/components/SchoolCard";
 import QuickAccessCard from "@/components/QuickAccessCard";
 import NotificationCarousel from "@/components/NotificationCarousel";
+import AboutSection from "@/components/AboutSection";
 import studentsGroup from "@/assets/students-group-saudi.png";
 import studentBoy from "@/assets/student-boy-saudi.png";
 import studentGirl from "@/assets/student-girl-saudi.png";
@@ -198,13 +199,19 @@ const Index = () => {
           </div>
         </section>
 
+        {/* About Section */}
+        <AboutSection />
+
         {/* Quick Access */}
         <section>
-          <div className="flex items-center gap-3 mb-6">
-            <div className="w-1 h-8 bg-gradient-to-b from-secondary to-accent rounded-full" />
-            <h2 className="text-2xl font-bold text-foreground">الوصول السريع</h2>
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <div className="w-1 h-8 bg-gradient-to-b from-secondary to-accent rounded-full" />
+              <h2 className="text-2xl font-bold text-foreground">الوصول السريع</h2>
+            </div>
+            <span className="text-sm text-muted-foreground bg-muted px-3 py-1 rounded-full">خدمات سريعة</span>
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
             {quickAccess.map((item, index) => (
               <QuickAccessCard key={item.path} {...item} delay={index * 100} />
             ))}

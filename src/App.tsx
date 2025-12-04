@@ -33,6 +33,7 @@ import Homework from "./pages/Homework";
 import Exams from "./pages/Exams";
 import Attendance from "./pages/Attendance";
 import Fees from "./pages/Fees";
+import Payment from "./pages/Payment";
 import Transport from "./pages/Transport";
 import Messages from "./pages/Messages";
 import Activities from "./pages/Activities";
@@ -61,6 +62,7 @@ const App = () => (
           <Route path="/exams" element={<Exams />} />
           <Route path="/attendance" element={<Attendance />} />
           <Route path="/fees" element={<Fees />} />
+          <Route path="/payment" element={<Payment />} />
           <Route path="/transport" element={<Transport />} />
           <Route path="/messages" element={<Messages />} />
           <Route path="/activities" element={<Activities />} />

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Newspaper, Phone, CreditCard, Bus, Sparkles, GraduationCap, Users, Award } from "lucide-react";
+import { Newspaper, Phone, CreditCard, Bus, Sparkles, GraduationCap, Users, Award, BookOpen, Calendar, Trophy } from "lucide-react";
 import SplashScreen from "@/components/SplashScreen";
 import Header from "@/components/Header";
 import BottomNavigation from "@/components/BottomNavigation";
@@ -7,6 +7,8 @@ import SchoolCard from "@/components/SchoolCard";
 import QuickAccessCard from "@/components/QuickAccessCard";
 import NotificationCarousel from "@/components/NotificationCarousel";
 import AboutSection from "@/components/AboutSection";
+import LoginPromptBanner from "@/components/LoginPromptBanner";
+import InteractiveSection from "@/components/InteractiveSection";
 import studentsGroup from "@/assets/students-group-saudi.png";
 import studentBoy from "@/assets/student-boy-saudi.png";
 import studentGirl from "@/assets/student-girl-saudi.png";
@@ -96,6 +98,33 @@ const stats = [
   { value: "25+", label: "عاماً من التميز", icon: Sparkles },
 ];
 
+const interactiveSections = [
+  {
+    title: "المكتبة الرقمية",
+    description: "آلاف الكتب والموارد التعليمية في متناول يدك",
+    icon: BookOpen,
+    image: studentsGroup,
+    path: "/library",
+    color: "from-blue-600/80 to-purple-600/80",
+  },
+  {
+    title: "الأنشطة والفعاليات",
+    description: "اكتشف أحدث الفعاليات والأنشطة المدرسية",
+    icon: Trophy,
+    image: studentBoy,
+    path: "/activities",
+    color: "from-orange-500/80 to-red-500/80",
+  },
+  {
+    title: "التقويم الدراسي",
+    description: "تابع المواعيد والاختبارات والإجازات",
+    icon: Calendar,
+    image: studentGirl,
+    path: "/schedule",
+    color: "from-emerald-500/80 to-teal-500/80",
+  },
+];
+
 const Index = () => {
   const [showSplash, setShowSplash] = useState(true);
 
@@ -177,9 +206,28 @@ const Index = () => {
           </div>
         </section>
 
+        {/* Login Prompt Banner */}
+        <LoginPromptBanner />
+
         {/* Notifications */}
         <section className="animate-slide-up" style={{ animationDelay: "0.2s" }}>
           <NotificationCarousel />
+        </section>
+
+        {/* Interactive Sections */}
+        <section>
+          <div className="flex items-center justify-between mb-6">
+            <div className="flex items-center gap-3">
+              <div className="w-1 h-8 bg-gradient-to-b from-accent to-primary rounded-full" />
+              <h2 className="text-2xl font-bold text-foreground">اكتشف المزيد</h2>
+            </div>
+            <span className="text-sm text-muted-foreground bg-muted px-3 py-1 rounded-full">خدمات تفاعلية</span>
+          </div>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {interactiveSections.map((section, index) => (
+              <InteractiveSection key={section.path} {...section} delay={index * 100} />
+            ))}
+          </div>
         </section>
 
         {/* Schools Grid */}

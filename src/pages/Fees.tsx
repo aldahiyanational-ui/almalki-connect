@@ -76,8 +76,8 @@ const Fees = () => {
   const paidPercentage = (feeSummary.paidAmount / feeSummary.totalFees) * 100;
 
   const handlePayment = () => {
-    // This would redirect to the payment gateway
-    window.open("https://payment.example.com", "_blank");
+    // Open BapaPay payment gateway
+    window.open("https://bapapay.esol.dev/School/login/1C0786FD-80AE-402A-85CF-EC5ECCDDFE48", "_blank");
   };
 
   return (

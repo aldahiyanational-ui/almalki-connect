@@ -55,8 +55,8 @@ const Payment = () => {
   const [amount, setAmount] = useState("");
 
   const handlePayment = () => {
-    // Open payment gateway
-    window.open("https://pay.sa/almalki-schools", "_blank");
+    // Open BapaPay payment gateway
+    window.open("https://bapapay.esol.dev/School/login/1C0786FD-80AE-402A-85CF-EC5ECCDDFE48", "_blank");
   };
 
   return (

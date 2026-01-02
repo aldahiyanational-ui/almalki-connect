@@ -97,39 +97,27 @@ const Contact = () => {
               نسعد بتواصلكم معنا والإجابة على جميع استفساراتكم
             </p>
 
-            {/* Unified Number - Main CTA */}
-            <div className="inline-flex flex-col items-center gap-2 bg-primary-foreground/20 backdrop-blur-lg rounded-2xl p-6 border border-primary-foreground/20">
-              <span className="text-primary-foreground/80 text-sm">الرقم الموحد</span>
-              <a
-                href="tel:920016166"
-                className="flex items-center gap-3 text-3xl md:text-4xl font-bold text-secondary hover:scale-105 transition-transform"
-                dir="ltr"
-              >
-                <Phone className="w-8 h-8 animate-pulse" />
-                920016166
-              </a>
-              <span className="text-primary-foreground/60 text-sm">متاح من الأحد إلى الخميس</span>
-            </div>
+            {/* WhatsApp - Main CTA */}
+            <a
+              href="https://wa.me/966500000000"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex flex-col items-center gap-2 bg-primary-foreground/20 backdrop-blur-lg rounded-2xl p-6 border border-primary-foreground/20 hover:bg-primary-foreground/30 transition-colors cursor-pointer"
+            >
+              <span className="text-primary-foreground/80 text-sm">تواصل معنا عبر واتساب</span>
+              <div className="flex items-center gap-3 text-3xl md:text-4xl font-bold text-success hover:scale-105 transition-transform">
+                <MessageCircle className="w-8 h-8 animate-pulse" />
+                <span>واتساب</span>
+              </div>
+              <span className="text-primary-foreground/60 text-sm">الدمام - المملكة العربية السعودية</span>
+            </a>
           </div>
         </section>
 
         {/* Quick Contact Options */}
-        <section className="grid grid-cols-2 md:grid-cols-4 gap-4 animate-slide-up" style={{ animationDelay: "0.1s" }}>
+        <section className="grid grid-cols-2 md:grid-cols-3 gap-4 animate-slide-up" style={{ animationDelay: "0.1s" }}>
           <a
-            href="tel:920016166"
-            className="group"
-          >
-            <Card variant="elevated" className="text-center p-6 hover:shadow-xl transition-all group-hover:scale-[1.02]">
-              <div className="w-14 h-14 gradient-primary rounded-2xl flex items-center justify-center mx-auto mb-3 group-hover:scale-110 transition-transform">
-                <Phone className="w-7 h-7 text-primary-foreground" />
-              </div>
-              <h3 className="font-bold text-foreground mb-1">اتصل بنا</h3>
-              <p className="text-sm text-muted-foreground">920016166</p>
-            </Card>
-          </a>
-
-          <a
-            href="https://wa.me/966920016166"
+            href="https://wa.me/966500000000"
             target="_blank"
             rel="noopener noreferrer"
             className="group"
@@ -139,12 +127,12 @@ const Contact = () => {
                 <MessageCircle className="w-7 h-7 text-success-foreground" />
               </div>
               <h3 className="font-bold text-foreground mb-1">واتساب</h3>
-              <p className="text-sm text-muted-foreground">تواصل فوري</p>
+              <p className="text-sm text-muted-foreground">تواصل معنا</p>
             </Card>
           </a>
 
           <a
-            href="mailto:info@almalki.edu.sa"
+            href="mailto:gr.almalkigroup@gmail.com"
             className="group"
           >
             <Card variant="elevated" className="text-center p-6 hover:shadow-xl transition-all group-hover:scale-[1.02]">
@@ -162,7 +150,7 @@ const Contact = () => {
                 <MapPin className="w-7 h-7 text-primary-foreground" />
               </div>
               <h3 className="font-bold text-foreground mb-1">الموقع</h3>
-              <p className="text-sm text-muted-foreground">الرياض</p>
+              <p className="text-sm text-muted-foreground">الدمام</p>
             </Card>
           </div>
         </section>
@@ -256,26 +244,28 @@ const Contact = () => {
 
           {/* Contact Info */}
           <div className="lg:col-span-2 space-y-4 animate-slide-up" style={{ animationDelay: "0.3s" }}>
-            {/* Unified Number Card */}
-            <Card variant="gradient">
-              <CardContent className="p-6">
-                <div className="flex items-center gap-4">
-                  <div className="w-14 h-14 bg-primary-foreground/20 backdrop-blur-sm rounded-2xl flex items-center justify-center">
-                    <Phone className="w-7 h-7 text-primary-foreground" />
+            {/* WhatsApp Card */}
+            <a
+              href="https://wa.me/966500000000"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Card variant="gradient" className="hover:scale-[1.02] transition-transform cursor-pointer">
+                <CardContent className="p-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-14 h-14 bg-success/80 backdrop-blur-sm rounded-2xl flex items-center justify-center">
+                      <MessageCircle className="w-7 h-7 text-success-foreground" />
+                    </div>
+                    <div>
+                      <p className="text-primary-foreground/80 text-sm">تواصل معنا عبر واتساب</p>
+                      <span className="text-2xl font-bold text-primary-foreground">
+                        اضغط هنا للتواصل
+                      </span>
+                    </div>
                   </div>
-                  <div>
-                    <p className="text-primary-foreground/80 text-sm">الرقم الموحد</p>
-                    <a
-                      href="tel:920016166"
-                      className="text-2xl font-bold text-primary-foreground hover:text-secondary transition-colors"
-                      dir="ltr"
-                    >
-                      920016166
-                    </a>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
+                </CardContent>
+              </Card>
+            </a>
 
             {/* Working Hours */}
             <Card variant="feature">
@@ -306,14 +296,14 @@ const Contact = () => {
                   <div className="w-10 h-10 bg-primary/20 rounded-xl flex items-center justify-center">
                     <Mail className="w-5 h-5 text-primary" />
                   </div>
-                  <h3 className="font-bold text-foreground">البريد الرئيسي</h3>
+                  <h3 className="font-bold text-foreground">البريد الإلكتروني</h3>
                 </div>
                 <a
-                  href="mailto:info@almalki.edu.sa"
+                  href="mailto:gr.almalkigroup@gmail.com"
                   className="text-primary hover:underline"
                   dir="ltr"
                 >
-                  info@almalki.edu.sa
+                  gr.almalkigroup@gmail.com
                 </a>
               </CardContent>
             </Card>
@@ -325,12 +315,11 @@ const Contact = () => {
                   <div className="w-10 h-10 bg-destructive/20 rounded-xl flex items-center justify-center">
                     <Building className="w-5 h-5 text-destructive" />
                   </div>
-                  <h3 className="font-bold text-foreground">المقر الرئيسي</h3>
+                  <h3 className="font-bold text-foreground">العنوان</h3>
                 </div>
                 <p className="text-muted-foreground text-sm">
                   المملكة العربية السعودية<br />
-                  الرياض، حي النزهة<br />
-                  ص.ب 12345، الرمز البريدي 11234
+                  الدمام
                 </p>
               </CardContent>
             </Card>

@@ -19,30 +19,32 @@ import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
 import { cn } from "@/lib/utils";
 
+const WHATSAPP_NUMBER = "920016166";
+
 const schools = [
   {
     name: "مدرسة أجيال المعالي الأهلية",
-    phone: "+966 11 123 4567",
+    phone: WHATSAPP_NUMBER,
     email: "ajyal@almalki.edu.sa",
-    address: "الرياض، حي النزهة، شارع الأمير سلطان",
+    address: "الدمام",
   },
   {
     name: "مدرسة قناديل الشرق الأهلية",
-    phone: "+966 11 234 5678",
+    phone: WHATSAPP_NUMBER,
     email: "qanadil@almalki.edu.sa",
-    address: "الرياض، حي الملقا، طريق الملك فهد",
+    address: "الدمام",
   },
   {
     name: "مدرسة الضاحية الأهلية للبنات",
-    phone: "+966 11 345 6789",
+    phone: WHATSAPP_NUMBER,
     email: "dahiya-girls@almalki.edu.sa",
-    address: "الرياض، حي الضاحية، شارع الإمام أحمد",
+    address: "الدمام",
   },
   {
     name: "مدرسة الضاحية الأهلية للبنين",
-    phone: "+966 11 456 7890",
+    phone: WHATSAPP_NUMBER,
     email: "dahiya-boys@almalki.edu.sa",
-    address: "الرياض، حي الضاحية، شارع الإمام أحمد",
+    address: "الدمام",
   },
 ];
 
@@ -99,7 +101,7 @@ const Contact = () => {
 
             {/* WhatsApp - Main CTA */}
             <a
-              href="https://wa.me/966500000000"
+              href={`https://wa.me/${WHATSAPP_NUMBER}`}
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex flex-col items-center gap-2 bg-primary-foreground/20 backdrop-blur-lg rounded-2xl p-6 border border-primary-foreground/20 hover:bg-primary-foreground/30 transition-colors cursor-pointer"
@@ -107,7 +109,7 @@ const Contact = () => {
               <span className="text-primary-foreground/80 text-sm">تواصل معنا عبر واتساب</span>
               <div className="flex items-center gap-3 text-3xl md:text-4xl font-bold text-success hover:scale-105 transition-transform">
                 <MessageCircle className="w-8 h-8 animate-pulse" />
-                <span>واتساب</span>
+                <span dir="ltr">{WHATSAPP_NUMBER}</span>
               </div>
               <span className="text-primary-foreground/60 text-sm">الدمام - المملكة العربية السعودية</span>
             </a>
@@ -117,7 +119,7 @@ const Contact = () => {
         {/* Quick Contact Options */}
         <section className="grid grid-cols-2 md:grid-cols-3 gap-4 animate-slide-up" style={{ animationDelay: "0.1s" }}>
           <a
-            href="https://wa.me/966500000000"
+            href={`https://wa.me/${WHATSAPP_NUMBER}`}
             target="_blank"
             rel="noopener noreferrer"
             className="group"
@@ -127,7 +129,7 @@ const Contact = () => {
                 <MessageCircle className="w-7 h-7 text-success-foreground" />
               </div>
               <h3 className="font-bold text-foreground mb-1">واتساب</h3>
-              <p className="text-sm text-muted-foreground">تواصل معنا</p>
+              <p className="text-sm text-muted-foreground" dir="ltr">{WHATSAPP_NUMBER}</p>
             </Card>
           </a>
 
@@ -246,7 +248,7 @@ const Contact = () => {
           <div className="lg:col-span-2 space-y-4 animate-slide-up" style={{ animationDelay: "0.3s" }}>
             {/* WhatsApp Card */}
             <a
-              href="https://wa.me/966500000000"
+              href={`https://wa.me/${WHATSAPP_NUMBER}`}
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -258,8 +260,8 @@ const Contact = () => {
                     </div>
                     <div>
                       <p className="text-primary-foreground/80 text-sm">تواصل معنا عبر واتساب</p>
-                      <span className="text-2xl font-bold text-primary-foreground">
-                        اضغط هنا للتواصل
+                      <span className="text-2xl font-bold text-primary-foreground" dir="ltr">
+                        {WHATSAPP_NUMBER}
                       </span>
                     </div>
                   </div>
@@ -364,15 +366,32 @@ const Contact = () => {
           </div>
         </section>
 
-        {/* Map Placeholder */}
+        {/* Google Maps - Dammam */}
         <Card variant="feature" className="overflow-hidden animate-slide-up" style={{ animationDelay: "0.5s" }}>
-          <div className="h-64 bg-muted flex items-center justify-center">
-            <div className="text-center">
-              <MapPin className="w-12 h-12 text-muted-foreground mx-auto mb-3" />
-              <p className="text-muted-foreground font-medium">خريطة مواقع المدارس</p>
-              <p className="text-sm text-muted-foreground/70">سيتم إضافة الخريطة التفاعلية قريباً</p>
+          <CardContent className="p-0">
+            <div className="p-4 border-b border-border">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 bg-destructive/20 rounded-xl flex items-center justify-center">
+                  <MapPin className="w-5 h-5 text-destructive" />
+                </div>
+                <div>
+                  <h3 className="font-bold text-foreground">موقعنا</h3>
+                  <p className="text-sm text-muted-foreground">الدمام - المملكة العربية السعودية</p>
+                </div>
+              </div>
             </div>
-          </div>
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d114562.95876042961!2d50.0165862!3d26.4367824!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3e49e7d6f0f4b2c5%3A0x8c30f4c7c4c0f4c4!2sDammam%2C%20Saudi%20Arabia!5e0!3m2!1sen!2s!4v1699999999999!5m2!1sen!2s"
+              width="100%"
+              height="350"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="موقع الدمام"
+              className="w-full"
+            />
+          </CardContent>
         </Card>
       </main>
 

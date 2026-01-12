@@ -10,6 +10,8 @@ import { useAuth } from '@/contexts/AuthContext';
 import Header from '@/components/Header';
 import BottomNavigation from '@/components/BottomNavigation';
 import { schools } from '@/contexts/SchoolContext';
+import SmartAlerts from '@/components/SmartAlerts';
+import SmartRecommendations from '@/components/SmartRecommendations';
 
 import studentsGroup from '@/assets/students-group-saudi.png';
 
@@ -75,6 +77,12 @@ const ParentDashboard = () => {
             </div>
           </div>
         </Card>
+
+        {/* Smart Alerts Section */}
+        <SmartAlerts />
+
+        {/* Smart Recommendations Section */}
+        <SmartRecommendations />
 
         {/* Quick Actions Grid */}
         <div>

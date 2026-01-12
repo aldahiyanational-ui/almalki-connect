@@ -9,6 +9,8 @@ import { Badge } from '@/components/ui/badge';
 import { useAuth } from '@/contexts/AuthContext';
 import Header from '@/components/Header';
 import BottomNavigation from '@/components/BottomNavigation';
+import SmartAlerts from '@/components/SmartAlerts';
+import SmartRecommendations from '@/components/SmartRecommendations';
 
 import studentBoy from '@/assets/student-boy-saudi.png';
 
@@ -74,6 +76,12 @@ const StudentDashboard = () => {
             </div>
           </div>
         </Card>
+
+        {/* Smart Alerts Section */}
+        <SmartAlerts />
+
+        {/* Smart Recommendations Section */}
+        <SmartRecommendations />
 
         {/* Quick Actions Grid */}
         <div>

@@ -6,6 +6,7 @@ import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
+import bgNews from "@/assets/bg-news.jpg";
 
 const categories = [
   { id: "all", label: "الكل" },
@@ -125,12 +126,23 @@ const News = () => {
     <div className="min-h-screen bg-background pb-20 md:pb-0">
       <Header />
 
-      <main className="container mx-auto px-4 py-6 space-y-6">
-        {/* Page Header */}
-        <div className="text-center animate-slide-up">
-          <h1 className="text-3xl font-bold text-foreground mb-2">الأخبار والإعلانات</h1>
-          <p className="text-muted-foreground">آخر المستجدات والفعاليات في مدارسنا</p>
+      {/* Hero Section with Background */}
+      <div className="relative h-48 md:h-64 overflow-hidden">
+        <img 
+          src={bgNews} 
+          alt="الأخبار والإعلانات" 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 p-6">
+          <div className="container mx-auto text-center">
+            <h1 className="text-3xl md:text-4xl font-bold text-white drop-shadow-lg mb-2 animate-slide-up">الأخبار والإعلانات</h1>
+            <p className="text-white/90 drop-shadow animate-slide-up">آخر المستجدات والفعاليات في مدارسنا</p>
+          </div>
         </div>
+      </div>
+
+      <main className="container mx-auto px-4 py-6 space-y-6">
 
         {/* Search & Filter */}
         <div className="flex flex-col sm:flex-row gap-4 animate-slide-up" style={{ animationDelay: "0.1s" }}>

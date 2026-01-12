@@ -19,6 +19,7 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { cn } from "@/lib/utils";
+import bgActivities from "@/assets/bg-activities.jpg";
 
 const upcomingEvents = [
   {
@@ -114,22 +115,31 @@ const Activities = () => {
     <div className="min-h-screen bg-background pb-20 md:pb-0">
       <Header />
 
-      <main className="container mx-auto px-4 py-6 space-y-6">
-        {/* Back Button */}
-        <Button
-          variant="ghost"
-          className="mb-4"
-          onClick={() => navigate("/dashboard")}
-        >
-          <ChevronLeft className="w-5 h-5 ml-2" />
-          العودة للوحة التحكم
-        </Button>
-
-        {/* Page Title */}
-        <div className="text-center mb-6">
-          <h1 className="text-2xl font-bold text-foreground">الأنشطة والفعاليات</h1>
-          <p className="text-muted-foreground">الفعاليات المدرسية والأنشطة</p>
+      {/* Hero Section with Background */}
+      <div className="relative h-48 md:h-64 overflow-hidden">
+        <img 
+          src={bgActivities} 
+          alt="الأنشطة والفعاليات" 
+          className="w-full h-full object-cover"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-background via-background/60 to-transparent" />
+        <div className="absolute bottom-0 left-0 right-0 p-6">
+          <div className="container mx-auto">
+            <Button
+              variant="ghost"
+              className="mb-2 text-white hover:bg-white/20"
+              onClick={() => navigate("/dashboard")}
+            >
+              <ChevronLeft className="w-5 h-5 ml-2" />
+              العودة للوحة التحكم
+            </Button>
+            <h1 className="text-3xl md:text-4xl font-bold text-white drop-shadow-lg">الأنشطة والفعاليات</h1>
+            <p className="text-white/90 drop-shadow">الفعاليات المدرسية والأنشطة</p>
+          </div>
         </div>
+      </div>
+
+      <main className="container mx-auto px-4 py-6 space-y-6">
 
         {/* Stats */}
         <div className="grid grid-cols-3 gap-3">

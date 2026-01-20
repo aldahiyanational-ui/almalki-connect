@@ -12,6 +12,7 @@ import BottomNavigation from '@/components/BottomNavigation';
 import { schools } from '@/contexts/SchoolContext';
 import SmartAlerts from '@/components/SmartAlerts';
 import SmartRecommendations from '@/components/SmartRecommendations';
+import SmartAnalytics from '@/components/SmartAnalytics';
 
 import studentsGroup from '@/assets/students-group-saudi.png';
 
@@ -77,6 +78,9 @@ const ParentDashboard = () => {
             </div>
           </div>
         </Card>
+
+        {/* Smart Analytics Section */}
+        <SmartAnalytics />
 
         {/* Smart Alerts Section */}
         <SmartAlerts />

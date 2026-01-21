@@ -1,10 +1,10 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { 
   BarChart3, TrendingUp, TrendingDown, Award, 
-  BookOpen, Calendar, Target, Zap, Star
+  BookOpen, Calendar, Target, Zap, Star, Loader2
 } from 'lucide-react';
 import {
   LineChart,
@@ -26,9 +26,42 @@ import {
   Radar
 } from 'recharts';
 import { motion } from 'framer-motion';
+import { supabase } from '@/integrations/supabase/client';
+import { useAuth } from '@/contexts/AuthContext';
 
-// بيانات الأداء الشهري
-const monthlyPerformance = [
+interface Student {
+  id: string;
+  name: string;
+  grade: string;
+  school_id: string;
+}
+
+interface PerformanceData {
+  month: string;
+  grade: number;
+  attendance: number;
+}
+
+interface SubjectData {
+  subject: string;
+  grade: number;
+  color: string;
+}
+
+interface SkillData {
+  skill: string;
+  value: number;
+  fullMark: number;
+}
+
+interface TimeData {
+  name: string;
+  value: number;
+  color: string;
+}
+
+// البيانات التجريبية (تظهر عند عدم وجود بيانات حقيقية)
+const defaultMonthlyPerformance = [
   { month: 'سبتمبر', grade: 85, attendance: 95 },
   { month: 'أكتوبر', grade: 88, attendance: 92 },
   { month: 'نوفمبر', grade: 82, attendance: 98 },
@@ -36,8 +69,7 @@ const monthlyPerformance = [
   { month: 'يناير', grade: 92, attendance: 96 },
 ];
 
-// بيانات المواد
-const subjectsData = [
+const defaultSubjectsData = [
   { subject: 'الرياضيات', grade: 92, color: 'hsl(var(--primary))' },
   { subject: 'اللغة العربية', grade: 88, color: 'hsl(var(--secondary))' },
   { subject: 'العلوم', grade: 85, color: 'hsl(var(--success))' },
@@ -45,31 +77,172 @@ const subjectsData = [
   { subject: 'الدراسات', grade: 78, color: 'hsl(var(--muted-foreground))' },
 ];
 
-// بيانات المهارات
-const skillsData = [
-  { skill: 'التفكير النقدي', value: 85 },
-  { skill: 'حل المشكلات', value: 78 },
-  { skill: 'التواصل', value: 92 },
-  { skill: 'العمل الجماعي', value: 88 },
-  { skill: 'الإبداع', value: 75 },
-  { skill: 'القيادة', value: 70 },
+const defaultSkillsData = [
+  { skill: 'التفكير النقدي', value: 85, fullMark: 100 },
+  { skill: 'حل المشكلات', value: 78, fullMark: 100 },
+  { skill: 'التواصل', value: 92, fullMark: 100 },
+  { skill: 'العمل الجماعي', value: 88, fullMark: 100 },
+  { skill: 'الإبداع', value: 75, fullMark: 100 },
+  { skill: 'القيادة', value: 70, fullMark: 100 },
 ];
 
-// بيانات توزيع الوقت
-const timeDistribution = [
+const defaultTimeDistribution = [
   { name: 'الدراسة', value: 45, color: 'hsl(var(--primary))' },
   { name: 'الأنشطة', value: 25, color: 'hsl(var(--secondary))' },
   { name: 'المشاريع', value: 20, color: 'hsl(var(--success))' },
   { name: 'الاختبارات', value: 10, color: 'hsl(var(--accent))' },
 ];
 
+const subjectColors = [
+  'hsl(var(--primary))',
+  'hsl(var(--secondary))',
+  'hsl(var(--success))',
+  'hsl(var(--accent))',
+  'hsl(var(--muted-foreground))',
+];
+
 const SmartAnalytics = () => {
-  const [selectedChild, setSelectedChild] = useState('أحمد');
-  
+  const { user } = useAuth();
+  const [students, setStudents] = useState<Student[]>([]);
+  const [selectedStudent, setSelectedStudent] = useState<Student | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [performanceData, setPerformanceData] = useState<PerformanceData[]>(defaultMonthlyPerformance);
+  const [subjectsData, setSubjectsData] = useState<SubjectData[]>(defaultSubjectsData);
+  const [skillsData, setSkillsData] = useState<SkillData[]>(defaultSkillsData);
+  const [timeDistribution, setTimeDistribution] = useState<TimeData[]>(defaultTimeDistribution);
+  const [isUsingDemoData, setIsUsingDemoData] = useState(false);
+
+  // جلب قائمة الطلاب
+  useEffect(() => {
+    const fetchStudents = async () => {
+      if (!user) {
+        setLoading(false);
+        setIsUsingDemoData(true);
+        return;
+      }
+
+      try {
+        const { data, error } = await supabase
+          .from('students')
+          .select('*')
+          .eq('user_id', user.id);
+
+        if (error) throw error;
+
+        if (data && data.length > 0) {
+          setStudents(data);
+          setSelectedStudent(data[0]);
+        } else {
+          setIsUsingDemoData(true);
+        }
+      } catch (error) {
+        console.error('Error fetching students:', error);
+        setIsUsingDemoData(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchStudents();
+  }, [user]);
+
+  // جلب بيانات الطالب المحدد
+  useEffect(() => {
+    const fetchStudentData = async () => {
+      if (!selectedStudent) return;
+
+      try {
+        // جلب الأداء الشهري
+        const { data: performance } = await supabase
+          .from('student_performance')
+          .select('*')
+          .eq('student_id', selectedStudent.id)
+          .order('created_at', { ascending: true });
+
+        if (performance && performance.length > 0) {
+          setPerformanceData(performance.map(p => ({
+            month: p.month,
+            grade: Number(p.average_grade),
+            attendance: Number(p.attendance_rate) || 100
+          })));
+        } else {
+          setPerformanceData(defaultMonthlyPerformance);
+        }
+
+        // جلب درجات المواد
+        const { data: subjects } = await supabase
+          .from('subject_grades')
+          .select('*')
+          .eq('student_id', selectedStudent.id);
+
+        if (subjects && subjects.length > 0) {
+          setSubjectsData(subjects.map((s, index) => ({
+            subject: s.subject,
+            grade: Number(s.grade),
+            color: subjectColors[index % subjectColors.length]
+          })));
+        } else {
+          setSubjectsData(defaultSubjectsData);
+        }
+
+        // جلب المهارات
+        const { data: skills } = await supabase
+          .from('student_skills')
+          .select('*')
+          .eq('student_id', selectedStudent.id);
+
+        if (skills && skills.length > 0) {
+          setSkillsData(skills.map(s => ({
+            skill: s.skill_name,
+            value: s.score,
+            fullMark: s.full_score || 100
+          })));
+        } else {
+          setSkillsData(defaultSkillsData);
+        }
+
+        // جلب توزيع الوقت
+        const { data: time } = await supabase
+          .from('study_time')
+          .select('*')
+          .eq('student_id', selectedStudent.id);
+
+        if (time && time.length > 0) {
+          const colors = ['hsl(var(--primary))', 'hsl(var(--secondary))', 'hsl(var(--success))', 'hsl(var(--accent))'];
+          setTimeDistribution(time.map((t, index) => ({
+            name: t.activity,
+            value: Number(t.hours),
+            color: colors[index % colors.length]
+          })));
+        } else {
+          setTimeDistribution(defaultTimeDistribution);
+        }
+      } catch (error) {
+        console.error('Error fetching student data:', error);
+      }
+    };
+
+    fetchStudentData();
+  }, [selectedStudent]);
+
   // حساب الإحصائيات
   const averageGrade = Math.round(subjectsData.reduce((acc, s) => acc + s.grade, 0) / subjectsData.length);
-  const trend = monthlyPerformance[monthlyPerformance.length - 1].grade - monthlyPerformance[0].grade;
-  const attendanceAvg = Math.round(monthlyPerformance.reduce((acc, m) => acc + m.attendance, 0) / monthlyPerformance.length);
+  const trend = performanceData.length >= 2 
+    ? performanceData[performanceData.length - 1].grade - performanceData[0].grade 
+    : 0;
+  const attendanceAvg = Math.round(performanceData.reduce((acc, m) => acc + m.attendance, 0) / performanceData.length);
+
+  const bestSubject = subjectsData.reduce((max, s) => s.grade > max.grade ? s : max, subjectsData[0]);
+  const worstSubject = subjectsData.reduce((min, s) => s.grade < min.grade ? s : min, subjectsData[0]);
+
+  if (loading) {
+    return (
+      <div className="flex items-center justify-center p-8">
+        <Loader2 className="w-6 h-6 animate-spin text-primary" />
+        <span className="mr-2 text-muted-foreground">جاري تحميل التحليلات...</span>
+      </div>
+    );
+  }
 
   return (
     <motion.div
@@ -83,18 +256,33 @@ const SmartAnalytics = () => {
         <div className="flex items-center gap-2">
           <BarChart3 className="w-5 h-5 text-primary" />
           <h2 className="text-lg font-bold text-foreground">تحليلات الأداء</h2>
+          {isUsingDemoData && (
+            <Badge variant="outline" className="text-xs">بيانات تجريبية</Badge>
+          )}
         </div>
-        <div className="flex gap-2">
-          {['أحمد', 'سارة'].map((child) => (
-            <Badge
-              key={child}
-              variant={selectedChild === child ? 'default' : 'outline'}
-              className="cursor-pointer"
-              onClick={() => setSelectedChild(child)}
-            >
-              {child}
-            </Badge>
-          ))}
+        <div className="flex gap-2 flex-wrap">
+          {students.length > 0 ? (
+            students.map((student) => (
+              <Badge
+                key={student.id}
+                variant={selectedStudent?.id === student.id ? 'default' : 'outline'}
+                className="cursor-pointer"
+                onClick={() => setSelectedStudent(student)}
+              >
+                {student.name}
+              </Badge>
+            ))
+          ) : (
+            ['أحمد', 'سارة'].map((name) => (
+              <Badge
+                key={name}
+                variant={name === 'أحمد' ? 'default' : 'outline'}
+                className="cursor-pointer opacity-50"
+              >
+                {name}
+              </Badge>
+            ))
+          )}
         </div>
       </div>
 
@@ -110,10 +298,10 @@ const SmartAnalytics = () => {
             <div className="flex items-center justify-center gap-1 mt-1">
               {trend > 0 ? (
                 <TrendingUp className="w-3 h-3 text-success" />
-              ) : (
+              ) : trend < 0 ? (
                 <TrendingDown className="w-3 h-3 text-destructive" />
-              )}
-              <span className={`text-xs ${trend > 0 ? 'text-success' : 'text-destructive'}`}>
+              ) : null}
+              <span className={`text-xs ${trend > 0 ? 'text-success' : trend < 0 ? 'text-destructive' : 'text-muted-foreground'}`}>
                 {trend > 0 ? '+' : ''}{trend}%
               </span>
             </div>
@@ -127,7 +315,9 @@ const SmartAnalytics = () => {
               <span className="text-2xl font-bold text-foreground">{attendanceAvg}%</span>
             </div>
             <p className="text-xs text-muted-foreground">نسبة الحضور</p>
-            <Badge variant="secondary" className="text-xs mt-1">ممتاز</Badge>
+            <Badge variant="secondary" className="text-xs mt-1">
+              {attendanceAvg >= 90 ? 'ممتاز' : attendanceAvg >= 75 ? 'جيد' : 'يحتاج تحسين'}
+            </Badge>
           </CardContent>
         </Card>
 
@@ -174,7 +364,7 @@ const SmartAnalytics = () => {
             </CardHeader>
             <CardContent>
               <ResponsiveContainer width="100%" height={200}>
-                <LineChart data={monthlyPerformance}>
+                <LineChart data={performanceData}>
                   <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--muted))" />
                   <XAxis 
                     dataKey="month" 
@@ -272,11 +462,11 @@ const SmartAnalytics = () => {
               <div className="flex justify-between mt-3 text-xs">
                 <div className="flex items-center gap-1 text-success">
                   <Star className="w-3 h-3" />
-                  <span>الأفضل: الرياضيات (92%)</span>
+                  <span>الأفضل: {bestSubject.subject} ({bestSubject.grade}%)</span>
                 </div>
                 <div className="flex items-center gap-1 text-destructive">
                   <Target className="w-3 h-3" />
-                  <span>تحتاج تحسين: الدراسات (78%)</span>
+                  <span>تحتاج تحسين: {worstSubject.subject} ({worstSubject.grade}%)</span>
                 </div>
               </div>
             </CardContent>

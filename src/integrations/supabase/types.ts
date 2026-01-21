@@ -80,6 +80,176 @@ export type Database = {
         }
         Relationships: []
       }
+      student_performance: {
+        Row: {
+          attendance_rate: number | null
+          average_grade: number
+          created_at: string
+          id: string
+          month: string
+          student_id: string
+        }
+        Insert: {
+          attendance_rate?: number | null
+          average_grade: number
+          created_at?: string
+          id?: string
+          month: string
+          student_id: string
+        }
+        Update: {
+          attendance_rate?: number | null
+          average_grade?: number
+          created_at?: string
+          id?: string
+          month?: string
+          student_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "student_performance_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "students"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      student_skills: {
+        Row: {
+          created_at: string
+          full_score: number | null
+          id: string
+          score: number
+          skill_name: string
+          student_id: string
+        }
+        Insert: {
+          created_at?: string
+          full_score?: number | null
+          id?: string
+          score: number
+          skill_name: string
+          student_id: string
+        }
+        Update: {
+          created_at?: string
+          full_score?: number | null
+          id?: string
+          score?: number
+          skill_name?: string
+          student_id?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "student_skills_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "students"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      students: {
+        Row: {
+          created_at: string
+          grade: string
+          id: string
+          name: string
+          school_id: string
+          updated_at: string
+          user_id: string
+        }
+        Insert: {
+          created_at?: string
+          grade: string
+          id?: string
+          name: string
+          school_id: string
+          updated_at?: string
+          user_id: string
+        }
+        Update: {
+          created_at?: string
+          grade?: string
+          id?: string
+          name?: string
+          school_id?: string
+          updated_at?: string
+          user_id?: string
+        }
+        Relationships: []
+      }
+      study_time: {
+        Row: {
+          activity: string
+          created_at: string
+          hours: number
+          id: string
+          student_id: string
+          week_start: string
+        }
+        Insert: {
+          activity: string
+          created_at?: string
+          hours: number
+          id?: string
+          student_id: string
+          week_start: string
+        }
+        Update: {
+          activity?: string
+          created_at?: string
+          hours?: number
+          id?: string
+          student_id?: string
+          week_start?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "study_time_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "students"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
+      subject_grades: {
+        Row: {
+          created_at: string
+          grade: number
+          id: string
+          semester: string
+          student_id: string
+          subject: string
+        }
+        Insert: {
+          created_at?: string
+          grade: number
+          id?: string
+          semester: string
+          student_id: string
+          subject: string
+        }
+        Update: {
+          created_at?: string
+          grade?: number
+          id?: string
+          semester?: string
+          student_id?: string
+          subject?: string
+        }
+        Relationships: [
+          {
+            foreignKeyName: "subject_grades_student_id_fkey"
+            columns: ["student_id"]
+            isOneToOne: false
+            referencedRelation: "students"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       user_roles: {
         Row: {
           id: string

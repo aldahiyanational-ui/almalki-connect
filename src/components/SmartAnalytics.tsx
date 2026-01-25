@@ -28,6 +28,7 @@ import {
 import { motion } from 'framer-motion';
 import { supabase } from '@/integrations/supabase/client';
 import { useAuth } from '@/contexts/AuthContext';
+import StudentDataForm from './StudentDataForm';
 
 interface Student {
   id: string;
@@ -111,6 +112,11 @@ const SmartAnalytics = () => {
   const [skillsData, setSkillsData] = useState<SkillData[]>(defaultSkillsData);
   const [timeDistribution, setTimeDistribution] = useState<TimeData[]>(defaultTimeDistribution);
   const [isUsingDemoData, setIsUsingDemoData] = useState(false);
+  const [refreshKey, setRefreshKey] = useState(0);
+
+  const handleDataAdded = () => {
+    setRefreshKey(prev => prev + 1);
+  };
 
   // جلب قائمة الطلاب
   useEffect(() => {
@@ -132,6 +138,7 @@ const SmartAnalytics = () => {
         if (data && data.length > 0) {
           setStudents(data);
           setSelectedStudent(data[0]);
+          setIsUsingDemoData(false);
         } else {
           setIsUsingDemoData(true);
         }
@@ -144,7 +151,7 @@ const SmartAnalytics = () => {
     };
 
     fetchStudents();
-  }, [user]);
+  }, [user, refreshKey]);
 
   // جلب بيانات الطالب المحدد
   useEffect(() => {
@@ -252,7 +259,7 @@ const SmartAnalytics = () => {
       className="space-y-4"
     >
       {/* العنوان واختيار الطفل */}
-      <div className="flex items-center justify-between">
+      <div className="flex items-center justify-between flex-wrap gap-2">
         <div className="flex items-center gap-2">
           <BarChart3 className="w-5 h-5 text-primary" />
           <h2 className="text-lg font-bold text-foreground">تحليلات الأداء</h2>
@@ -260,7 +267,7 @@ const SmartAnalytics = () => {
             <Badge variant="outline" className="text-xs">بيانات تجريبية</Badge>
           )}
         </div>
-        <div className="flex gap-2 flex-wrap">
+        <div className="flex gap-2 flex-wrap items-center">
           {students.length > 0 ? (
             students.map((student) => (
               <Badge
@@ -283,6 +290,7 @@ const SmartAnalytics = () => {
               </Badge>
             ))
           )}
+          <StudentDataForm onDataAdded={handleDataAdded} />
         </div>
       </div>
 

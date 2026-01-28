@@ -1,7 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import { 
   Users, Calendar, FileText, Award, BookOpen, 
-  ClipboardList, MessageSquare, Settings, LogOut, User, GraduationCap
+  ClipboardList, MessageSquare, Settings, LogOut, GraduationCap
 } from 'lucide-react';
 import { Card, CardContent } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -9,6 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { useAuth } from '@/contexts/AuthContext';
 import Header from '@/components/Header';
 import BottomNavigation from '@/components/BottomNavigation';
+import TeacherAnalytics from '@/components/TeacherAnalytics';
 
 import studentGirl from '@/assets/student-girl-saudi.png';
 
@@ -130,6 +131,9 @@ const TeacherDashboard = () => {
             </Button>
           </CardContent>
         </Card>
+
+        {/* Teacher Analytics */}
+        <TeacherAnalytics />
 
         {/* Account Actions */}
         <div className="flex gap-3">
